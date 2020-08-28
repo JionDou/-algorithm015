@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScappleDocument Version="1.1" ID="373FFE69-B46E-4202-865E-BBB01BD72E60">
+    <Notes>
+        <Note ID="0" FontSize="12.0" Position="332.0,215.0" Width="32.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>作业</String>
+            <ConnectedNoteIDs>1-2</ConnectedNoteIDs>
+        </Note>
+        <Note ID="1" FontSize="12.0" Position="11.0,16.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>0.225469 0.225462 0.225466</TextColor>
+            </Appearance>
+            <String>1.用 add first 或 add last 这套新的 API 改写 Deque 的代码
+Deque&lt;String&gt; deque = new LinkedList&lt;&gt;();
+
+// 双端队列 实现 队列 先进先出
+deque.addLast("a");
+deque.addLast("b");
+deque.addLast("c");
+System.out.println(deque);
+
+String peek = deque.peekFirst();
+System.out.println(peek);
+System.out.println(deque);
+
+while(deque.size() &gt; 0) {
+    System.out.println(deque.pollFirst());
+}
+
+System.out.println(deque);
+
+//双端队列实现栈后进先出
+deque.addFirst("a");
+deque.addFirst("b");
+deque.addFirst("c");
+System.out.println(deque);
+
+String peek2 = deque.peekFirst();
+System.out.println(peek2);
+System.out.println(deque);
+
+while(deque.size() &gt; 0){
+    System.out.println(deque.pollFirst());
+}
+
+System.out.println(deque);
+</String>
+            <ConnectedNoteIDs>0</ConnectedNoteIDs>
+        </Note>
+        <Note ID="2" FontSize="12.0" Position="379.0,16.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>2.分析 Queue 和 Priority Queue 的源码
+2.1 queue
+		boolean add(E e)
+    在队列头部增加一个元素，如果容量已满，则抛出异常，成功则返回true
+		boolean offer(E e)
+    在队列头部增加一个元素，如果容量已满，则返回false，成功加入，返回true;
+		E remove();
+    将队列头部元素移出队列并返回，如果队列为空，则抛出异常。
+		E poll();
+   将队列头部元素移出队列并返回，如果队列为空，返回null
+		E element();
+     返回队列头部节点，但不移除队列头节点，如果队列为空，则抛出异常。
+		E peek();
+     返回队列头部节点，但不移除队列头节点，如果队列为空，返回null。
+</String>
+            <ConnectedNoteIDs>0</ConnectedNoteIDs>
+            <Formatting>
+                <FormatRange Bold="Yes">32,33</FormatRange>
+                <FormatRange Bold="Yes">65,30</FormatRange>
+                <FormatRange Bold="Yes">95,30</FormatRange>
+                <FormatRange Bold="Yes">125,22</FormatRange>
+                <FormatRange Bold="Yes">147,5</FormatRange>
+                <FormatRange Bold="Yes">152,8</FormatRange>
+                <FormatRange Bold="Yes">160,24</FormatRange>
+                <FormatRange Bold="Yes">184,28</FormatRange>
+                <FormatRange Bold="Yes">212,16</FormatRange>
+                <FormatRange Bold="Yes">228,24</FormatRange>
+                <FormatRange Bold="Yes">252,25</FormatRange>
+                <FormatRange Bold="Yes">277,32</FormatRange>
+                <FormatRange Bold="Yes">309,18</FormatRange>
+                <FormatRange Bold="Yes">327,28</FormatRange>
+                <FormatRange Bold="Yes">355,4</FormatRange>
+                <FormatRange Bold="Yes">359,1</FormatRange>
+                <FormatRange Bold="Yes">360,1</FormatRange>
+            </Formatting>
+        </Note>
+    </Notes>
+    <BackgroundShapes></BackgroundShapes>
+    <AutoFit>0</AutoFit>
+    <NoteStyles>
+        <Style Name="Bubble (Blue)" ID="027E6796-E832-4034-B0C2-A617F6DF404A" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.561855 0.71062 0.779401</BorderColor>
+            <FillColor>0.702319 0.888276 0.974252</FillColor>
+        </Style>
+        <Style Name="Bubble (Green)" ID="5E7210F1-1C1C-44B5-8A85-D34B7DF11D8D" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.572684 0.758969 0.558154</BorderColor>
+            <FillColor>0.715855 0.948712 0.697692</FillColor>
+        </Style>
+        <Style Name="Bubble (Pink)" ID="0FD4B3DC-4D23-4AE6-9E62-32368945210E" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.794796 0.560965 0.58607</BorderColor>
+            <FillColor>0.957566 0.766747 0.999616</FillColor>
+        </Style>
+        <Style Name="Bubble (Red)" ID="AB8735AC-7FB1-4C9B-8097-C89FD8290105" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.794796 0.560965 0.58607</BorderColor>
+            <FillColor>0.993495 0.701207 0.732587</FillColor>
+        </Style>
+        <Style Name="Bubble (Yellow)" ID="AE626289-BCFA-4EBC-B57D-99B73153208B" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.798177 0.714184 0.522055</BorderColor>
+            <FillColor>0.997722 0.89273 0.652569</FillColor>
+        </Style>
+        <Style Name="Red Text" ID="90F73483-6308-433D-9FB4-8667514ACFAD" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="Yes" AffectNoteBody="No" AffectFade="No">
+            <TextColor>0.985948 0.0 0.026951</TextColor>
+        </Style>
+        <Style Name="Title Text" ID="AF305D69-C5F5-4AD5-BD9C-B4695D77DDFF" AffectFontStyle="Yes" AffectAlignment="Yes" AffectTextColor="No" AffectNoteBody="No" AffectFade="No">
+            <FontSize>28.0</FontSize>
+            <IsBold>Yes</IsBold>
+        </Style>
+    </NoteStyles>
+    <UISettings>
+        <BackgroundColor>0.999767 0.98837 0.949907</BackgroundColor>
+        <DefaultFont>Helvetica</DefaultFont>
+    </UISettings>
+    <PrintSettings PaperSize="595.0,842.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
+</ScappleDocument>
