@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ScappleDocument Version="1.1" ID="373FFE69-B46E-4202-865E-BBB01BD72E60">
     <Notes>
-        <Note ID="0" FontSize="12.0" Position="332.0,215.0" Width="32.0">
+        <Note ID="0" FontSize="12.0" Position="308.460938,182.878906" Width="32.0">
             <Appearance>
                 <Alignment>Left</Alignment>
             </Appearance>
             <String>作业</String>
-            <ConnectedNoteIDs>1-2</ConnectedNoteIDs>
+            <ConnectedNoteIDs>1-8, 10</ConnectedNoteIDs>
         </Note>
-        <Note ID="1" FontSize="12.0" Position="11.0,16.0" Width="200.0">
+        <Note ID="1" FontSize="12.0" Position="12.984375,28.695312" Width="268.0">
             <Appearance>
                 <Alignment>Left</Alignment>
                 <TextColor>0.225469 0.225462 0.225466</TextColor>
@@ -50,9 +50,10 @@ System.out.println(deque);
 </String>
             <ConnectedNoteIDs>0</ConnectedNoteIDs>
         </Note>
-        <Note ID="2" FontSize="12.0" Position="379.0,16.0" Width="200.0">
+        <Note ID="2" FontSize="12.0" Position="368.0,26.601562" Width="430.0">
             <Appearance>
                 <Alignment>Left</Alignment>
+                <TextColor>0.150563 0.150559 0.150561</TextColor>
             </Appearance>
             <String>2.分析 Queue 和 Priority Queue 的源码
 2.1 queue
@@ -68,7 +69,15 @@ System.out.println(deque);
      返回队列头部节点，但不移除队列头节点，如果队列为空，则抛出异常。
 		E peek();
      返回队列头部节点，但不移除队列头节点，如果队列为空，返回null。
-</String>
+2.2 Priority Queue 是通过“极大优先级堆”实现的,即堆顶元素是优先级最大的元素.
+PriorityQueue是基于最大优先级堆实现的，根据比较器的情况可以是大根堆或者小根堆；
+PriorityQueue不支持null；
+PriorityQueue不是线程安全的，多线程环境下可以使用java.util.concurrent.PriorityBlockingQueue；
+使用iterator()遍历时，不保证输出的序列是有序的，其实遍历的是存储数组。
+
+作者：aTaller
+链接：https://juejin.im/post/6844903745889763341
+来源：掘金</String>
             <ConnectedNoteIDs>0</ConnectedNoteIDs>
             <Formatting>
                 <FormatRange Bold="Yes">32,33</FormatRange>
@@ -90,9 +99,388 @@ System.out.println(deque);
                 <FormatRange Bold="Yes">360,1</FormatRange>
             </Formatting>
         </Note>
+        <Note ID="3" FontSize="12.0" Position="822.0,28.570312" Width="364.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>0.111831 0.111827 0.111829</TextColor>
+            </Appearance>
+            <String>3.删除数组中的重复项
+方法:双指针法
+
+public int removeDuplicates(int[] nums) {
+    if(nums.length == 0) return 0;
+    int i = 0;
+    for (j = 1; j &lt; nums.length; j++) {
+       if(nums[j] != nums[i]) {
+           i++;
+         nums[i] = nums[j];
+       }
+    }
+   return i +1;
+}
+复杂度分析
+	•	时间复杂度：O(n)，假设数组的长度是 n，那么 i 和 j分别最多遍历 n 步。 
+	•	空间复杂度：O(1)。
+Js:双指针法
+var removeDuplicates = function(nums) {
+   if(nums.length == 0) return 0;
+   let i = 0;
+   for(let j = 1; j &lt; nums.length; j++){
+       if(nums[j] != nums[i]){
+           i++;
+           nums[i] = nums[j];
+       }
+   }
+   return i+1;
+}</String>
+            <ConnectedNoteIDs>0</ConnectedNoteIDs>
+            <Formatting>
+                <FormatRange Bold="Yes">262,5</FormatRange>
+                <FormatRange Bold="Yes">267,1</FormatRange>
+                <FormatRange Italic="Yes">291,1</FormatRange>
+            </Formatting>
+        </Note>
+        <Note ID="4" FontSize="12.0" Position="3.660156,547.027344" Width="357.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>0.0 0.0 0.0</TextColor>
+            </Appearance>
+            <String>4.旋转数组
+方法1.暴力
+旋转 k 次，每次将数组旋转 1 个元素。
+public class Solution {
+   public void roate(int[] nums, int k){
+      int temp previous;
+      for(int i = 0; i &lt; k; i++){
+         previous = nums[nums.length-1];
+        for(int j = 0; j &lt; nums.length; j++){
+           temp = nums[j];
+           nums[j] = previous;
+           previous = temp;
+        }
+     }   
+  }
+}
+复杂度分析:
+时间复杂度：O(n*k)。每个元素都被移动 1 步（O(n) k次（O(k) 。
+空间复杂度：O(1) 。没有额外空间被使用。
+方法 2：使用额外的数组
+public class Solution {
+   public void roate(int[] nums, int k){
+      int[] a = new int[nums.length];
+      for(int i = 0; i &lt; nums.length; i++){
+         a[(i+k) % nums.length] = nums[i];
+    }
+     for(int i = 0; i &lt; nums.length; i++){
+         nums[i] = a[i];
+     }
+  }
+}
+复杂度分析
+时间复杂度: O(n) 。将数字放到新的数组中需要一遍遍历，另一边来把新数组的元素拷贝回原数组。
+空间复杂度： O(n)。另一个数组需要原数组长度的空间。
+方法 3：使用环状替换
+public  class Solution {
+   public void roate(int[] nums, int k){
+     k = k % nums.length;
+     int count = 0;
+     for (int start = 0; count &lt; nums.length; start++){
+         int current = start;
+         int prev = nums[start];
+         do{
+           int next = (current + k) % nums.length;
+           int temp = nums[next];
+           nums[next] = prev;
+           prev = temp;
+           current = next;
+           count++;
+        }while(start != current);
+    }
+  }
+}
+复杂度分析
+时间复杂度：O(n) 。只遍历了每个元素一次。
+空间复杂度：O(1)。使用了常数个额外空间。
+方法 4：使用反转
+public class Solution{
+   public void roate(int[] nums, int k){
+       k %= nums.length;
+       reverse(num, 0, nums.length-1);
+       reverse(num, 0, k-1);
+       reverse(num, k, nums.length-1);
+   }
+ public void reverse(int[] nums, int start, int end) {
+        while(start &lt; end){
+         int temp = nums[start];
+         nums[start] = nums[end];
+         nums[end] = temp;
+         start++;
+         end - -;
+     }
+  }
+}
+复杂度分析
+	•	时间复杂度：O(n)。 n 个元素被反转了总共 3 次。
+	•	空间复杂度：O(1) 。 没有使用额外的空间。</String>
+            <ConnectedNoteIDs>0</ConnectedNoteIDs>
+            <Formatting>
+                <FormatRange Bold="Yes">430,2</FormatRange>
+                <FormatRange Bold="Yes">432,2</FormatRange>
+                <FormatRange Bold="Yes">434,8</FormatRange>
+                <FormatRange Bold="Yes">442,1</FormatRange>
+                <FormatRange Bold="Yes">804,2</FormatRange>
+                <FormatRange Bold="Yes">806,2</FormatRange>
+                <FormatRange Bold="Yes">808,7</FormatRange>
+                <FormatRange Bold="Yes">815,1</FormatRange>
+                <FormatRange Bold="Yes">1292,5</FormatRange>
+                <FormatRange Bold="Yes">1297,1</FormatRange>
+                <FormatRange Bold="Yes">1345,2</FormatRange>
+                <FormatRange Bold="Yes">1347,2</FormatRange>
+                <FormatRange Bold="Yes">1349,5</FormatRange>
+                <FormatRange Bold="Yes">1354,1</FormatRange>
+                <FormatRange Bold="Yes">1782,5</FormatRange>
+            </Formatting>
+        </Note>
+        <Note ID="5" FontSize="12.0" Position="348.515625,505.757812" Width="462.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>0.0 0.0 0.0</TextColor>
+            </Appearance>
+            <String>5. 合并两个有序链表
+方法一：递归
+如果 l1 或者 l2 一开始就是空链表 ，那么没有任何操作需要合并，所以我们只需要返回非空链表。否则，我们要判断 l1 和 l2 哪一个链表的头节点的值更小，然后递归地决定下一个添加到结果里的节点。如果两个链表有一个为空，递归结束。
+public  ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+     if(l1 == null){
+         return l2;
+      }else if(l2 == null){
+        return l1;
+     }else if(l1.val &lt; l2.val){
+        l1.next = mergeTwoLists(l1.next, l2);
+       return l1;
+     }else{
+          l2.next = mergeTwoLists(l1, l2.next);
+          return l2;
+    }
+   
+}
+复杂度分析
+时间复杂度：O(n + m)，其中 n 和 m 分别为两个链表的长度。因为每次调用递归都会去掉 l1 或者 l2 的头节点（直到至少有一个链表为空），函数 mergeTwoList 至多只会递归调用每个节点一次。因此，时间复杂度取决于合并后的链表长度，即 O(n+m)。
+空间复杂度：O(n + m)，其中 n和 m 分别为两个链表的长度。递归调用 mergeTwoLists 函数时需要消耗栈空间，栈空间的大小取决于递归调用的深度。结束递归调用时 mergeTwoLists 函数最多调用 n+mn+m 次，因此空间复杂度为 O(n+m)。
+
+方法二：迭代
+用迭代的方法来实现上述算法。当 l1 和 l2 都不是空链表时，判断 l1 和 l2 哪一个链表的头节点的值更小，将较小值的节点添加到结果里，当一个节点被添加到结果里之后，将对应链表中的节点向后移一位。
+public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    ListNode prehead = new ListNode(-1);
+    ListNode prev = prehead;
+    while(l1 != null &amp;&amp; l2 != null){
+         if(l1.val &lt;= l2.val){
+            prev.next = l1;
+            l1 = l1.next;
+         }else{
+            prev.next = l2;
+            l2 = l2.next;
+         }
+        prev = prev.next;
+     }
+ //合并后l1和l2最多只有一个还未被合并完,直接将链表末尾指向未合并完的链表即可
+ prev.next = l1 == null ? l2 : l1;
+ return prehead.next;
+}
+时间复杂度：O(n + m) ，其中 n 和 m 分别为两个链表的长度。因为每次循环迭代中，l1 和 l2 只有一个元素会被放进合并链表中， 因此 while 循环的次数不会超过两个链表的长度之和。所有其他操作的时间复杂度都是常数级别的，因此总的时间复杂度为 O(n+m)。
+空间复杂度：O(1) 。只需要常数的空间存放若干变量。</String>
+            <ConnectedNoteIDs>0</ConnectedNoteIDs>
+        </Note>
+        <Note ID="6" FontSize="12.0" Position="879.0,518.472656" Width="311.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>0.0 0.0 0.0</TextColor>
+            </Appearance>
+            <String>6. 合并两个有序数组
+方法一 : 合并后排序
+class Solution{
+   public void merge(int[] nums1,int m, int[] nums2, int n) {
+          System.arraycopy(nums2,0,nums1,m,n);
+          Arrays.sort(nums1);
+     } 
+}
+	•	时间复杂度 : O((n+m)log(n+m))。
+	•	空间复杂度 : O(1)。
+</String>
+            <ConnectedNoteIDs>0</ConnectedNoteIDs>
+            <Formatting>
+                <FormatRange Bold="Yes">12,3</FormatRange>
+                <FormatRange Bold="Yes">15,3</FormatRange>
+                <FormatRange Bold="Yes">18,5</FormatRange>
+                <FormatRange Bold="Yes">23,1</FormatRange>
+                <FormatRange Italic="Yes">200,1</FormatRange>
+                <FormatRange Italic="Yes">203,1</FormatRange>
+                <FormatRange Italic="Yes">205,1</FormatRange>
+                <FormatRange Italic="Yes">211,1</FormatRange>
+                <FormatRange Italic="Yes">213,1</FormatRange>
+            </Formatting>
+        </Note>
+        <Note ID="7" FontSize="12.0" Position="892.0,707.0" Width="353.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>7.两数之和
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+       Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();
+       for(int i = 0; i &lt; nums.length; i++) {
+           int complement = target - nums[i];
+           if(map.containskey(complement)) {
+              return new int[] {map.get(complement),i};
+           }
+          map.put(nums[i],i);
+        }
+       throw new IllegalArgumentException(“No two sum solution”);
+    }
+}</String>
+            <ConnectedNoteIDs>0</ConnectedNoteIDs>
+        </Note>
+        <Note ID="8" FontSize="12.0" Position="860.832031,917.84375" Width="409.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>8.移动零
+两次遍历
+class Solution {
+    public void moveZeroes(int[] nums) {
+          if(nums == null) return;
+          //第一次遍历的时候,j指针记录非零的个数,只要是非零的都赋给nums[j]
+          int j =0;
+          for(int i = 0; i &lt; nums.length; i ++) {
+                if(nums[j] != 0) {
+                    nums[j++] = nums[i];
+                }
+           }
+          //非零元素统计完了,剩下的都是0了
+         //第二次遍历的时候把末尾的元素都赋为0
+         for(int i = j; i &lt; nums.length; ++i) {
+            nums[i] = 0;
+         }
+     }
+}
+一次遍历
+public void moveZeroes(int[] nums) {
+   if(nums == null) return;
+   //双指针i和j
+    int j = 0;
+   for(int i = 0; i &lt; nums.length; i++) {
+         //当元素!=0交换到左边,等于0放到右边
+         if(nums ! = 0) {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j++] = temp;
+         }
+    }
+}</String>
+            <ConnectedNoteIDs>0</ConnectedNoteIDs>
+        </Note>
+        <Note ID="10" FontSize="12.0" Position="1252.199219,1030.117188" Width="464.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>9.加一
+判断有没有进位并模拟出它的进位方式，如十位数加 1 个位数置为 0，如此循环直到判断没有再进位就退出循环返回结果。
+然后还有一些特殊情况就是当出现 99、999 之类的数字时，循环到最后也需要进位，出现这种情况时需要手动将它进一位。
+class Solution {
+   public int[] pulsOne(int[] digits) {
+      for(int i = digits.length - 1; i &gt;= 0; i- -) {
+           digits[i]++;
+           digits[i] = digits[i] % 10;
+           if(digits[i] != 0) return digits;
+      }
+      digits = new int digits[digits.length + 1];
+      digits[0] = 1;
+      return digits;   
+   }
+}
+</String>
+            <ConnectedNoteIDs>0</ConnectedNoteIDs>
+        </Note>
+        <Note ID="11" FontSize="12.0" Position="1210.519531,13.476562" Width="462.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>0.278101 0.278093 0.278097</TextColor>
+            </Appearance>
+            <String>10. 设计循环双端队列
+方法一:数组实现
+10.1: 定义循环变量front和rear.
+         front:指向队列头部,第一个有效数据的位置.
+         rear:指向队列尾部,最后一个有效数据的下一个位置,即下一个从队尾入队元素的位置.
+10.2: 循环数组中任何时刻一定至少有一个位置不存放有效元素
+         判别队列为空的条件是：front == rear;
+         判别队列为满的条件是：(rear + 1) % capacity == front;(当 rear 循环到数组的前面，要从后面追上 front，还差一格的时候，判定队列为满。)
+10.3: 指针后移的时候，索引 + 1，要取模；
+       指针前移的时候，为了循环到数组的末尾，需要先加上数组的长度，然后再对数组长度取模。
+public class MyCircularDeque {
+     // head == tail 成立的时候表示队列为空
+     // tail + 1 == head
+      private int capacity;
+      private int[] arr;
+      private int front;
+      private int rear;
+     
+      public MyCircularDeque(int k) {
+          capacity = k + 1;
+          arr = new int[capacity];
+          front = 0;
+          rear = 0;
+      }
+     public  boolean  insertFront(int value) {
+             if(isFull()) {
+                return false;
+            }
+          front = (front - 1 + capacity) % capacity;
+          arr[front] = value;
+          return true; 
+     }
+     public boolean insertLast(int value) {
+          if(isFull()) {
+            return false;
+         }
+        arr[rear] = value;
+        rear = (rear + 1) % capacity;
+        return true;
+     }
+     public boolean deleteFront() {
+         if(isEmpty()) return false;
+         front = (front + 1) % capacity;
+         return true;   
+     }
+     public boolean deleteLast() {
+          if(isEmpty()) return false;
+         front = (front - 1 + capacity) % capacity;
+         return true;  
+     }
+    public int getFront() {
+         if(isEmpty()) return -1;
+         return arr[front];
+     }
+     public int getRear() {
+          if(isEmpty()) return -1;
+          return arr[(rear - 1 + capacity) % capacity];
+     }
+    public boolean isEmpty() {
+         return front == rear;
+    }
+     public boolean isFull() {
+          return (rear + 1) % capacity == front;
+     }
+ } </String>
+        </Note>
+        <Note ID="12" FontSize="12.0" Position="364.0,1359.0" Width="64.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>11. 接雨水
+</String>
+        </Note>
     </Notes>
     <BackgroundShapes></BackgroundShapes>
-    <AutoFit>0</AutoFit>
+    <AutoFit>0, 6-8, 12</AutoFit>
     <NoteStyles>
         <Style Name="Bubble (Blue)" ID="027E6796-E832-4034-B0C2-A617F6DF404A" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
             <BorderThickness>1</BorderThickness>
